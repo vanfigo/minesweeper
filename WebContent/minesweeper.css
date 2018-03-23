@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+html, body {
+	font-family: 'Roboto', sans-serif;
+}
+body {
+	padding-top: 20px;
+}
+h1 {
+	text-align: center;
+	margin-right: 20px;
+}
+h3 {
+	text-align: center;
+	font-weight: bold;
+	margin: 50px;
+}
+ul {
+	padding: 0;
+	margin-top: 15px;
+	margin-bottom: 0;
+}
+li {
+	display: flex;
+	align-items: center;
+}
+.setup {
+	color: white;
+	background-color: #34495e;
+	text-align: center;
+	margin: 20 0;
+}
+.setup > *{
+	margin: 7px;
+}
+.setup > input {
+	color: black;
+	width: 50px;
+	text-align: center;
+	font-size: 1.2em;
+}
+.title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.rules-button {
+	background: url("rules.png") 0 0 no-repeat;
+	padding: 0px 12px;
+}
+.game-button {
+	background: url("game.png") 0 0 no-repeat;
+	padding: 5px 20px;
+}
+.minesweeper {
+	background: url("minesweeper.png") 0 0 no-repeat;
+	padding: 30px 50px;
+}
+.trophy {
+	background: url("trophy.png") 0 0 no-repeat;
+	padding: 30px 50px;
+}
+.lost {
+	background: url("lose.png") 0 0 no-repeat;
+	padding: 30px 50px;
+}
+.rules-icon {
+	padding: 35px;
+	margin-right: 10px;
+}
+.rules-cells {
+	background: url("rules-cells.png") 0 0 no-repeat;
+}
+.rules-number {
+	background: url("rules-number.png") 0 0 no-repeat;
+}
+.rules-flag {
+	background: url("rules-flag.png") 0 0 no-repeat;
+}
+.rules-win {
+	background: url("rules-win.png") 0 0 no-repeat;
+}
+.rules-lose {
+	background: url("rules-lose.png") 0 0 no-repeat;
+}
+.game {
+	width: 400px;
+	background-color: #ecf0f1;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+.cell {
+	background-color: #7f8c8d;
+	width: 18px;
+	height: 18px;
+	margin: 1;
+	align-self: flex-start;
+	color: #fff;
+	text-align: center;
+}
+.cell:hover {
+	cursor: pointer;
+}
+.cell.mine {
+	background: url("mine.png") 1px 0 no-repeat;
+	background-color: #f39c12;
+}
+.cell.flag {
+	background: url("flag.png") 1px 0 no-repeat;
+	background-color: #2980b9;
+}
+.cell.marked {
+	background-color: #95a5a6;
+}
+.cell.wrong {
+	background-color: #c0392b;
+}
+.cell.cero {
+	background-color: #bdc3c7;
+}
