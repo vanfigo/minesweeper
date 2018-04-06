@@ -1,0 +1,23 @@
+{
+  "users": [{
+    "id": 1,
+    "name": "Rodrigo Loyola",
+    "username": "vanfigo"
+  }],
+  "leaderboard": [{
+    "id": 1,
+    "score": 0,
+    "time": 0,
+    "user_id": 1
+  },{
+    "id": 2,
+    "score": 0,
+    "time": 0,
+    "user_id": 1
+  },{
+    "id": 3,
+    "score": 0,
+    "time": 0,
+    "user_id": 1
+  }]
+}

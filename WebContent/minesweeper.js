@@ -1,12 +1,26 @@
 $(document).ready(function(){
-	
+
 	var cellArray = [],
 		totalMines = 0,
 		totalCells = 0,
 		flags = 0,
 		xCells = 0,
-		yCells = 0;
-	
+		yCells = 0,
+		difficultArray = [{
+			xCells: 10,
+			yCells: 10,
+			mines:	10
+		},{
+			xCells: 30,
+			yCells: 20,
+			mines:	60
+		},{
+			xCells: 50,
+			yCells: 25,
+			mines:	120
+		}];
+		$('.alert, .card').hide();
+
 	var validateClick = function(){
 		coordinatesArray = $(this).attr('coordinate').split(',');
 		var xPos = parseInt(coordinatesArray[0]);
@@ -33,14 +47,14 @@ $(document).ready(function(){
 					return 0;
 				}
 			}
-			
+
 			updateResult();
 			if(totalCells === totalMines){
 				winGame();
 			}
 		}
 	};
-	
+
 	var validateRightClick = function() {
 		coordinatesArray = $(this).attr('coordinate').split(',');
 		var xPos = parseInt(coordinatesArray[0]);
@@ -52,14 +66,25 @@ $(document).ready(function(){
 			updateResult();
 		}
 	};
-	
+
 	var startBoard = function() {
-		xCells = $('input')[0].value;
-		yCells = $('input')[1].value;
-		totalMines = parseInt($('input')[2].value);
+		if( $('option:selected').val() === '' ) {
+			alert('Please select a difficult');
+			return 0;
+		}
+
+		$('.progress').show();
+		$('#result').hide();
+		$('.navbar').removeClass('bg-success bg-danger').addClass('bg-warning');
+
+		var optionSelected = parseInt($('option:selected').val());
+		var boardData = difficultArray[optionSelected];
+		xCells = boardData.xCells;
+		yCells = boardData.yCells;
+		totalMines = boardData.mines;
 		flags = 0;
 		$("div.game").empty();
-		$("div.game").width(20 * xCells);
+		$("div.game").width(23 * xCells);
 		for(var y = 0; y < yCells; y++) {
 			cellArray[y] = [];
 			for(var x = 0; x < xCells; x++) {
@@ -84,7 +109,7 @@ $(document).ready(function(){
 		$('div.cell').bind('click', validateClick);
 		$('div.cell').bind('contextmenu', validateRightClick);
 	};
-	
+
 	var getMineCount = function(xPos, yPos){
 		var bombCount = 0;
 		//look to the right
@@ -121,18 +146,21 @@ $(document).ready(function(){
 		}
 		return bombCount;
 	};
-	
+
 	var revealCeroCells = function(xPos, yPos) {
 		var bombCount = getMineCount(xPos, yPos);
-		
+
 		if(cellArray[yPos][xPos] !== null) {
 			return 0;
 		}
 		totalCells--;
 		var cell = $('div[coordinate="' + xPos + ', ' + yPos + '"]');
 		cellArray[yPos][xPos] = bombCount;
-		
-		cell.removeClass('flag');
+
+		if(cell.hasClass('flag')) {
+			cell.removeClass('flag');
+			flags--;
+		}
 		if(bombCount === 0) {
 			cell.addClass('cero');
 		} else {
@@ -173,7 +201,7 @@ $(document).ready(function(){
 			revealCeroCells(xPos+1, yPos-1);
 		}
 	};
-	
+
 	var winGame = function() {
 		$('div.cell').each(function(key, value){
 			if($(value).attr('class').split(' ').length === 1) {
@@ -182,9 +210,11 @@ $(document).ready(function(){
 		});
 		$('div.cell').unbind('click');
 		$('div.cell').unbind('contextmenu');
-		$('h3').empty().addClass('text-success').append('<span class="trophy"></span>You win');
+		$('.navbar').removeClass('bg-warning').addClass('bg-success');
+		$('.progress').hide();
+		$('#result').show().text('You win');
 	};
-	
+
 	var loseGame = function() {
 		for(var yPos = 0; yPos < yCells; yPos++){
 			for(var xPos = 0; xPos < xCells; xPos++){
@@ -200,36 +230,24 @@ $(document).ready(function(){
 		}
 		$('div.cell').unbind('click');
 		$('div.cell').unbind('contextmenu');
-		$('h3').empty().addClass('text-danger').append('<span class="lost"></span>You lose');
+		$('.navbar').removeClass('bg-warning').addClass('bg-danger');
+		$('.progress').hide();
+		$('#result').show().text('You lose');
 	};
-	
+
 	var updateResult = function() {
-		var minesLeft = totalMines - flags;
+		var minesLeft = totalMines - flags,
+			progress = 100 - (minesLeft * 100 / totalMines);
 		minesLeft = minesLeft < 0 ? 0 : minesLeft;
-		$('h3').removeAttr('class');
-		$('h3').text("Mines left: " + minesLeft);
+		progress = progress > 100 ? 100 : progress;
+		$('#mine-count').text(minesLeft);
+		$('.progress-bar').attr('aria-valuenow', progress).width(progress + '%');
 	};
-	startBoard();
-	
+
 	$('.btn-game').bind('click', function(){
 		$('div.cell').unbind('click');
 		$('div.cell').unbind('contextmenu');
 		startBoard();
 	});
 
-	$('.btn-rules').bind('click', function(){
-		$( "#dialog-rules" ).dialog({
-			modal: true,
-			width: 400,
-			buttons: [{
-				text: "Got it!",
-				icons: {
-					primary: "ui-icon-heart"
-				},
-				click: function() {
-					$( this ).dialog( "close" );
-				}
-			}]
-		});
-	});
 });

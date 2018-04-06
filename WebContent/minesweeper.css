@@ -1,42 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
 html, body {
-	font-family: 'Roboto', sans-serif;
-}
-body {
-	padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 h1 {
 	text-align: center;
 	margin-right: 20px;
 }
-h3 {
-	text-align: center;
-	font-weight: bold;
-	margin: 50px;
-}
-ul {
-	padding: 0;
-	margin-top: 15px;
-	margin-bottom: 0;
-}
 li {
 	display: flex;
 	align-items: center;
-}
-.setup {
-	color: white;
-	background-color: #34495e;
-	text-align: center;
-	margin: 20 0;
-}
-.setup > *{
-	margin: 7px;
-}
-.setup > input {
-	color: black;
-	width: 50px;
-	text-align: center;
-	font-size: 1.2em;
 }
 .title {
 	display: flex;
@@ -45,23 +18,11 @@ li {
 }
 .rules-button {
 	background: url("rules.png") 0 0 no-repeat;
-	padding: 0px 12px;
+	padding: 6px 20px;
 }
 .game-button {
 	background: url("game.png") 0 0 no-repeat;
-	padding: 5px 20px;
-}
-.minesweeper {
-	background: url("minesweeper.png") 0 0 no-repeat;
-	padding: 30px 50px;
-}
-.trophy {
-	background: url("trophy.png") 0 0 no-repeat;
-	padding: 30px 50px;
-}
-.lost {
-	background: url("lose.png") 0 0 no-repeat;
-	padding: 30px 50px;
+	padding: 6px 20px;
 }
 .rules-icon {
 	padding: 35px;
@@ -82,19 +43,33 @@ li {
 .rules-lose {
 	background: url("rules-lose.png") 0 0 no-repeat;
 }
+.nav-item.navbar-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translatex(-50%) translateY(-50%);
+}
+.progress {
+	width: 300px;
+	height: 10px;
+}
+#result {
+	color: white;
+}
 .game {
-	width: 400px;
 	background-color: #ecf0f1;
-	margin: 0 auto;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-content: flex-start;
 }
+.card {
+	margin: 0 auto;
+}
 .cell {
 	background-color: #7f8c8d;
-	width: 18px;
-	height: 18px;
+	width: 21px;
+	height: 21px;
 	margin: 1;
 	align-self: flex-start;
 	color: #fff;
@@ -104,11 +79,11 @@ li {
 	cursor: pointer;
 }
 .cell.mine {
-	background: url("mine.png") 1px 0 no-repeat;
+	background: url("mine.png") 3px no-repeat;
 	background-color: #f39c12;
 }
 .cell.flag {
-	background: url("flag.png") 1px 0 no-repeat;
+	background: url("flag.png") 3px no-repeat;
 	background-color: #2980b9;
 }
 .cell.marked {
