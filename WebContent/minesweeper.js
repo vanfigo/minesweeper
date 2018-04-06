@@ -6,6 +6,7 @@ $(document).ready(function(){
 		flags = 0,
 		xCells = 0,
 		yCells = 0,
+		duration = 500,
 		difficultArray = [{
 			xCells: 10,
 			yCells: 10,
@@ -19,7 +20,6 @@ $(document).ready(function(){
 			yCells: 25,
 			mines:	120
 		}];
-		$('.alert, .card').hide();
 
 	var validateClick = function(){
 		coordinatesArray = $(this).attr('coordinate').split(',');
@@ -73,8 +73,11 @@ $(document).ready(function(){
 			return 0;
 		}
 
-		$('.progress').show();
-		$('#result').hide();
+		$('#result').slideUp($('#result').is(':visible') ? duration : 0, function() {
+			$('.progress').fadeIn(duration, function() {
+				$('[data-toggle="tooltip"]').tooltip('hide').attr('data-original-title', 'Mines left: ' + totalMines).tooltip('update').tooltip('show');
+			});
+		});
 		$('.navbar').removeClass('bg-success bg-danger').addClass('bg-warning');
 
 		var optionSelected = parseInt($('option:selected').val());
@@ -210,9 +213,10 @@ $(document).ready(function(){
 		});
 		$('div.cell').unbind('click');
 		$('div.cell').unbind('contextmenu');
+		$('[data-toggle="tooltip"]').tooltip('hide');
 		$('.navbar').removeClass('bg-warning').addClass('bg-success');
 		$('.progress').hide();
-		$('#result').show().text('You win');
+		$('#result').text('You win').slideDown(duration);
 	};
 
 	var loseGame = function() {
@@ -230,9 +234,10 @@ $(document).ready(function(){
 		}
 		$('div.cell').unbind('click');
 		$('div.cell').unbind('contextmenu');
+		$('[data-toggle="tooltip"]').tooltip('hide');
 		$('.navbar').removeClass('bg-warning').addClass('bg-danger');
 		$('.progress').hide();
-		$('#result').show().text('You lose');
+		$('#result').text('You lose').slideDown(duration);
 	};
 
 	var updateResult = function() {
@@ -240,8 +245,10 @@ $(document).ready(function(){
 			progress = 100 - (minesLeft * 100 / totalMines);
 		minesLeft = minesLeft < 0 ? 0 : minesLeft;
 		progress = progress > 100 ? 100 : progress;
-		$('#mine-count').text(minesLeft);
+		if($('.progress').is(':visible'))
+			$('[data-toggle="tooltip"]').tooltip('hide').attr('data-original-title', 'Mines left: ' + minesLeft).tooltip('update').tooltip('show');
 		$('.progress-bar').attr('aria-valuenow', progress).width(progress + '%');
+
 	};
 
 	$('.btn-game').bind('click', function(){

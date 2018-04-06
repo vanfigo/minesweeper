@@ -8,7 +8,7 @@
 	<body oncontextmenu="return false;">
 		<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-warning">
 		  <a class="navbar-brand" href="#">
-		    <img src="minesweeper.png" width="30" height="30" alt="">
+		    <img src="minesweeper.png" alt="">
 				Mine Sweeper
 		  </a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,8 +23,8 @@
 						</button>
 		      </li>
 					<li class="nav-item navbar-center">
-						<h2 id="result" class="text-center navbar-text"></h2>
-						<div class="progress">
+						<h2 id="result" class="text-center navbar-text" style="display: none;"></h2>
+						<div class="progress" data-toggle="tooltip" data-placement="bottom" title="" data-trigger="manual" style="display: none;">
 						  <div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 					</li>
@@ -42,7 +42,7 @@
 		    </form>
 		  </div>
 		</nav>
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row justify-content-md-center">
 				<div class="game"></div>
 			</div>
@@ -86,7 +86,7 @@
 		    </div>
 		  </div>
 		</div>
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
